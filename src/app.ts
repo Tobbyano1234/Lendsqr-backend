@@ -5,8 +5,21 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
+import db from "./configs/db.config";
+// import db from "./configs/knexfile";
 
 dotenv.config();
+
+db.raw("SELECT VERSION()")
+  .then((version) => console.log("MySQL Database is connected Successfully"))
+  .catch((err) => {
+    console.log(err);
+    throw err;
+  })
+  .finally(() => {
+    db.destroy();
+  });
+
 const PORT = process.env.PORT;
 
 const app = express();
