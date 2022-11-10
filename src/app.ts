@@ -5,8 +5,20 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
-
+import db from "./configs/db.config";
+import userRouter from "./routes/userRoute";
+import accountRouter from "./routes/accountRoute";
+import transferRouter from "./routes/transferRoute";
+import withdrawalRouter from "./routes/withdrawalRoute";
 dotenv.config();
+
+db.raw("SELECT VERSION()")
+  .then((version) => console.log("MySQL Database is connected Successfully"))
+  .catch((err) => {
+    console.log(err);
+    throw err;
+  });
+
 const PORT = process.env.PORT;
 
 const app = express();
@@ -16,6 +28,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
+
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/accounts", accountRouter);
+app.use("/api/v1/transfers", transferRouter);
+app.use("/api/v1/withdrawals", withdrawalRouter);
 
 // catch 404 and forward to error handler
 
