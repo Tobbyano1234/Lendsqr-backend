@@ -8,11 +8,11 @@ const config: { [key: string]: Knex.Config } = {
   development: {
     client: "mysql",
     connection: {
-      host: process.env.DB_HOST || "sql7.freesqldatabase.com",
+      host: process.env.DB_HOST || "localhost",
       port: Number(process.env.DB_PORT as string) || 3306,
-      database: process.env.DB_NAME || "sql7544556",
-      user: process.env.DB_USER || "sql7544556",
-      password: process.env.DB_PASSWORD || "hQX3KRGDdi",
+      database: process.env.DB_NAME || "demo_credit",
+      user: process.env.DB_USER || "root",
+      password: "",
     },
     migrations: {
       directory: "/Users/decagon/Desktop/Lendsqr Backend/src/models",

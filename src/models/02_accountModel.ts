@@ -7,16 +7,9 @@ exports.up = async (db: {
     table.uuid("userId").index().references("id").inTable("users");
     table.string("bankName", 255).notNullable();
     table.string("accountName", 255).notNullable();
-    table
-      .string("accountNumber")
-      .unique()
-      .notNullable()
-      // .checkRegex("[0-9]{8}")
-      .checkLength("=", 10);
-    table.integer("walletBalance");
+    table.string("accountNumber").unique().notNullable().checkLength("=", 10);
     table.timestamp("created_at").defaultTo(db.raw("now()"));
     table.timestamp("updated_at").nullable();
-    // table.timestamp("deleted").nullable();
   });
 };
 

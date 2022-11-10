@@ -9,11 +9,9 @@ exports.up = async (db: {
     table.string("bankName", 255).notNullable();
     table.string("accountName", 255).notNullable();
     table.string("email", 255).notNullable();
-    table.string("destinationAccount", 255).notNullable();
     table
-      .string("accountNumber")
+      .string("destinationAccountNumber", 255)
       .notNullable()
-      // .checkRegex("[0-9]{8}")
       .checkLength("=", 10);
     table.integer("amount");
     table.string("status").defaultTo("pending");
